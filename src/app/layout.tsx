@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${outfit.className} bottom-0 left-[-20%] right-0 top-[-10%] rounded-full bg-[radial-gradient(circle_farthest-side,rgb(60,60,60),rgb(0,0,32))]`}
+        className={`${outfit.className} bg-custom bg-cover overflow-x-hidden`} 
       >
         <Providers>
           {children}
