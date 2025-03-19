@@ -6,7 +6,7 @@ export default function TransactionSummary({ transaction }: { transaction: Trans
 
     return (
         <>
-            <div className='mb-6 text-sm font-medium text-gray-500 border border-gray-200 bg-gray-900'>
+            <div className='mb-2 text-sm font-medium text-gray-500 border border-gray-200 bg-gray-900'>
                 <p className='text-sm font-black p-2 text-gray-100'>ID: {transaction.id}</p>
                 <ul
                     role="list"
@@ -14,16 +14,17 @@ export default function TransactionSummary({ transaction }: { transaction: Trans
                 >
                     {transaction.contents.map((item) => (
                         <li key={item.id} className="p-5" >
-                            <div className='flex items-center space-x-6 '>
-                                <div className='relative w-32 h-32'>
+                            <div className='flex items-center space-x-4 '>
+                                <div className='relative w-32 h-20'>
                                     <Image
                                         src={getImagePath(item.product.image)}
                                         alt={`Imagen de Producto ${item.product.name}`}
                                         className="absolute"
-                                        fill
+                                        width={75}
+                                        height={75}
                                     />
                                 </div>
-                                <div className="flex-auto space-y-1">
+                                <div className="flex-auto">
                                     <h3 className="text-green-500 font-bold">{item.product.name}</h3>
                                     <p className="text-lg font-extrabold  text-gray-100">{formatCurrency(+item.price)}</p>
                                     <p className="text-lg  text-gray-300">Cantidad: {item.quantity}</p>
@@ -33,7 +34,7 @@ export default function TransactionSummary({ transaction }: { transaction: Trans
                     ))}
                 </ul>
 
-                <dl className="space-y-6  text-sm font-medium text-gray-500 p-5">
+                <dl className="space-y-6  text-sm font-medium text-gray-500 p-2">
                     {transaction.coupon && (
                         <>
                             <div className="flex justify-between">

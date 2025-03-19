@@ -22,11 +22,10 @@ export default function EditProductForm({ children }: { children: React.ReactNod
             state.errors.forEach(error => toast.error(error))
         }
         if (state.success) {
-            toast.success(state.success)
-            router.push('/admin/products')
+            router.push('/admin/products?page=1')
+            // toast.success(state.success)
         }
     }, [state.errors, state.success])
-
 
     return (
         <form
@@ -36,7 +35,7 @@ export default function EditProductForm({ children }: { children: React.ReactNod
             {children}
             <input
                 type='submit'
-                className='rounded bg-green-400 font-bold py-2 w-full cursor-pointer'
+                className='text-white text-sm relative w-full bg-blue-950/90 hover:bg-blue-900 p-2 rounded-lg'
                 value='Guardar cambios'
             />
         </form>

@@ -1,9 +1,8 @@
 import { Product } from "@/schemas"
 import { revalidatePath } from "next/cache"
-import { toast } from "react-toastify"
 
 export default function DeleteProductForm({ productId }: { productId: Product['id'] }) {
-    
+
     const handleDeleteProduct = async () => {
         'use server'
         const url = `${process.env.API_URL}/products/${productId}`
@@ -13,7 +12,7 @@ export default function DeleteProductForm({ productId }: { productId: Product['i
 
         await req.json()
         revalidatePath('/admin/products')
-        toast.success("Producto eliminado correctamente")
+        revalidatePath("product-by-category")
     }
     return (
         <form

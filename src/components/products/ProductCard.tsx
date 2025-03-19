@@ -6,24 +6,26 @@ import AddProductButton from "./AddProductButton";
 export default function ProductCard({ product }: { product: Product }) {
     return (
         <div
-            className='rounded bg-gray-900 shadow relative border border-gray-500'
+            className='shadow relative border border-gray-500 max-w-80 bg-black bg-opacity-50 rounded-2xl overflow-hidden mx-auto'
         >
             <div className={`${!isAvailable(product.inventory) && 'opacity-40'}`}>
                 <Image
                     src={getImagePath(product.image)}
                     alt={`Imagen de producto: ${product.name}`}
-                    width={600}
-                    height={500}
+                    width={350}
+                    height={400}
                     priority
                 />
-                <div className="p-3 space-y-2">
-                    <h3 className="text-xl font-bold text-gray-200">{product.name}</h3>
-                    <p className="text-gray-300">Disponibles:
-                        {isAvailable(product.inventory) ? (
-                            product.inventory
-                        ) : <span className="bg-red-600 rounded-lg px-3 py-1 text-white text-center text-sm uppercase">Agotado</span>}
-                    </p>
-                    <p className="text-2xl font-extrabold text-yellow-300">{formatCurrency(product.price)}</p>
+                <div className="p-3 space-y-2 flex flex-col text-sm">
+                    <h3 className="text-lg font-bold text-gray-200">{product.name}</h3>
+                    <section className="flex justify-between">
+                        <p className="bg-cyan-600 px-2 rounded-lg">Disponibles: {''}
+                            {isAvailable(product.inventory) ? (
+                                <span className="font-bold">{product.inventory}</span>
+                            ) : <span className="bg-red-600 rounded-lg px-3 py-1 text-white text-center text-sm uppercase">Agotado</span>}
+                        </p>
+                        <p className="font-extrabold text-yellow-300">{formatCurrency(product.price)}</p>
+                    </section>
                 </div>
             </div>
             {

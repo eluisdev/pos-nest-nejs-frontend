@@ -7,6 +7,7 @@ import Calendar from "react-calendar"
 import 'react-calendar/dist/Calendar.css'
 import TransactionSummary from './TransactionSummary'
 import { formatCurrency } from '@/utils'
+import Loading from '../ui/Loading'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
@@ -24,7 +25,7 @@ export default function TransactionFilter() {
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 relative items-start'>
-            <div className='lg:sticky lg:top-10'>
+            <div className='lg:sticky lg:top-10 mx-auto'>
                 <Calendar
                     value={date}
                     onChange={setDate}
@@ -33,7 +34,7 @@ export default function TransactionFilter() {
             </div>
 
             <div>
-                {isLoading && 'Cargando...'}
+                {isLoading && <Loading />}
                 {data ? data.length ? (
                     data.map(transaction => (
                         <TransactionSummary

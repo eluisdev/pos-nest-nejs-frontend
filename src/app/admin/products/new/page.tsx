@@ -8,7 +8,7 @@ export default function NewProductPage() {
         <>
             <Link
                 href={'/admin/products?page=1'}
-                className="rounded bg-green-400 font-bold py-2 px-10"
+                className="text-white text-sm relative bg-blue-950/90 hover:bg-blue-900 p-2 rounded-lg"
             >Volver</Link>
             <Heading>Nuevo producto</Heading>
             <AddProductForm>

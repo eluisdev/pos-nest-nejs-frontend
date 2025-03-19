@@ -27,20 +27,20 @@ export default function ProductsTable({ products }: { products: Product[] }) {
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Inventario
                                     </th>
-                                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                                        <span className="sr-only">Acciones</span>
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Acciones
                                     </th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200">
                                 {products.map(product => (
                                     <tr key={product.id}>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        <td className="whitespace-nowrap px-3 py-1 text-sm text-gray-500">
                                             <Image
                                                 src={getImagePath(product.image)}
                                                 alt={`Imagen del producto ${product.name}`}
-                                                width={120}
-                                                height={120}
+                                                width={50}
+                                                height={50}
                                                 priority
                                             />
                                         </td>
@@ -54,7 +54,7 @@ export default function ProductsTable({ products }: { products: Product[] }) {
                                             {product.inventory}
                                         </td>
                                         <td className="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 ">
-                                            <div className='flex gap-5 justify-end items-center'>
+                                            <div className='flex gap-5 justify-start items-center'>
                                                 <Link
                                                     className="text-indigo-600 hover:text-indigo-800"
                                                     href={`/admin/products/${product.id}/edit`}

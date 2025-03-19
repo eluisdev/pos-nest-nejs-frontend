@@ -35,7 +35,7 @@ export async function updateProduct(
     body: JSON.stringify(product.data),
   });
 
-  const json = req.json();
+  const json = await req.json();
 
   if (!req.ok) {
     const errors = ErrorResponseSchema.parse(json);

@@ -52,8 +52,7 @@ export const OrderSchema = z.object({
   coupon: z.string(),
   contents: z
     .array(OrderContentSchema)
-    .min(1, { message: "El Carrito no puede ir vacio" }),
-  userId: z.number(),
+    .min(1, { message: "El Carrito no puede ir vacio" })
 });
 
 // Success / Error Response
@@ -119,24 +118,21 @@ export const LoginSchema = RegisterSchema.pick({
 });
 
 export const TokenSchema = z.object({
-  userId: z.number(),
-  username: z.string(),
+  token: z.string(),
+});
+
+export const UserSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  email: z.string().email(),
   rol: z.string(),
-  iat: z.number(),
-  exp: z.number(),
 });
 
-export const UserSchema = TokenSchema.pick({
-  userId: true,
-  username: true,
-  rol: true,
-});
-
+export type Category = z.infer<typeof CategorySchema>;
 export type Product = z.infer<typeof ProductSchema>;
 export type ShoppingCart = z.infer<typeof ShoppingCartSchema>;
 export type CardItem = z.infer<typeof ShoppingCartContentsSchema>;
 export type Coupon = z.infer<typeof CouponResponseSchema>;
 export type Transaction = z.infer<typeof TransactionResponseSchema>;
-
 export type Token = z.infer<typeof TokenSchema>;
 export type User = z.infer<typeof UserSchema>;

@@ -4,11 +4,11 @@ import { cartStore } from "@/cartStore"
 
 export default function CartButton() {
     const totalProducts = useStore(state => state.totalProducts)
-    const openMenu = cartStore(state => state.openMenu)
+    const showMenu = cartStore(state => state.showMenu)
     const contents = useStore(state => state.contents)
     return (
         <>
-            <button className="relative" aria-label="Carrito de compras" title="Ver carrito" onClick={openMenu}>
+            <button className="relative" aria-label="Carrito de compras" title="Ver carrito" onClick={showMenu}>
                 {
                     contents.length ? (<p className="absolute text-white bg-blue-500 rounded-full font-bold text-xs -top-1 right-0 w-3">{totalProducts}</p>) : null
                 }

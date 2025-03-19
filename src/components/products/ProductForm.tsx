@@ -3,7 +3,7 @@ import UploadProductImage from "./UploadProductImage"
 
 async function getCategories() {
     const url = `${process.env.API_URL}/categories`
-    const req = await fetch(url)
+    const req = await fetch(url, { next: { revalidate: 3600 } })
     const json = await req.json()
     const categories = CategoriesResponseSchema.parse(json)
     return categories

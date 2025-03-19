@@ -2,25 +2,23 @@ import { submitOrder } from "@/actions/submit-order-action"
 import { useStore } from "@/store"
 import { useActionState, useEffect } from "react"
 import { toast } from "react-toastify"
-
+import Loading from "../ui/Loading"
 
 export default function SubmitOrderForm() {
 
     const total = useStore(state => state.total)
     const cuopon = useStore(state => state.coupon)
     const contents = useStore(state => state.contents)
-    const userId = useStore(state => state.user)
     const clearOrder = useStore(state => state.clearOrder)
 
     const order = {
         total,
         coupon: cuopon.name,
         contents,
-        userId: userId.userId
     }
 
     const submitOrderWithData = submitOrder.bind(null, order)
-    const [state, dispatch] = useActionState(submitOrderWithData, {
+    const [state, dispatch, isPending] = useActionState(submitOrderWithData, {
         errors: [],
         success: ''
     })
@@ -39,12 +37,18 @@ export default function SubmitOrderForm() {
     return (
         <form
             action={dispatch}
+            className="flex justify-center"
         >
-            <input
-                type="submit"
-                className="mt-5 w-full bg-indigo-600 hover:bg-indigo-700 text-white uppercase font-bold p-3"
-                value="Confirmar cuenta"
-            />
+            <section className="flex gap-2">
+                <input
+                    type="submit"
+                    className="my-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white uppercase font-bold p-1 rounded-lg"
+                    disabled={isPending}
+                    value="Confirmar cuenta"
+                />
+                {isPending && <Loading />}
+            </section>
+
         </form>
     )
 }

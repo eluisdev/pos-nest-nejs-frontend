@@ -13,20 +13,20 @@ export default function CouponForm() {
     }
     return (
         <>
-            <p className="py-5 font-bold border-t border-gray-300 text-yellow-500">Canjear Cupón</p>
+            <p className="py-4 font-bold border-t border-gray-300 text-yellow-500 text-sm">Canjear Cupón</p>
             <form
                 className="flex"
                 onSubmit={(e) => handleSubmit(e)}
             >
                 <input
                     type="text"
-                    className="p-2 bg-gray-200 border-gray-300 w-full"
+                    className="p-2 bg-gray-200 border-gray-300 w-full h-8"
                     placeholder="Ingresa un cupón"
                     name="coupon_name"
                 />
                 <input
                     type="submit"
-                    className="p-3 bg-blue-400 font-bold hover:cursor-pointer"
+                    className=" px-1 bg-blue-400 font-bold hover:cursor-pointer"
                     value='Canjear'
                 />
             </form>
