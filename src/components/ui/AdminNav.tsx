@@ -1,34 +1,42 @@
 import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
 import CloseButton from '../auth/CloseButton'
-import { getUser } from '@/utils/authUser'
+import TransparentHeader from './TransparentHeader'
+import React from 'react'
+import MobileMenuAdmin from './MobileMenuAdmin'
 
-export default async function AdminNav() {
-    const user = await getUser()
+const categories = [
+    { id: "admin/products", name: "Productos" },
+    { id: "admin/sales", name: "Ventas" },
+    { id: "1", name: "Tienda", }
+]
+
+async function AdminNav() {
     return (
-        <header className="px-10 py-5 bg-gray-950 flex md:flex-row flex-col justify-between">
-            <div className="flex gap-5 text-white">
-                <Logo />
-            </div>
-
-            <div className="flex md:flex-row flex-col gap-2 items-center">
-                <Link
-                    href={'/admin/products'}
-                    className="rounded text-white hover:text-blue-300 font-bold p-2"
-                >Productos</Link>
-
-                <Link
-                    href={'/admin/sales'}
-                    className="rounded text-white hover:text-blue-300 font-bold p-2"
-                >Ventas</Link>
-                {
-                    user?.rol === "admin" && <Link
-                        href={'/1'}
-                        className="rounded bg-green-400 font-bold py-2 px-2"
-                    >Tienda</Link>
-                }
+        <TransparentHeader>
+            <section className='flex justify-between'>
+                <MobileMenuAdmin categories={categories} />
                 <CloseButton />
+            </section>
+            <div className="max-sm:hidden flex md:flex-row flex-col gap-2 items-center">
+                <Logo />
+                <nav className='flex max-sm:flex-col font-medium sm:rounded-full justify-center items-center max-sm:w-full mx-5'>
+                    <Link
+                        href={'/admin/products?page=1'}
+                        className="text-white hover:text-blue-400 p-2 font-light"
+                    >Productos</Link>
+                    <Link
+                        href={'/admin/sales'}
+                        className="text-white hover:text-blue-400 p-2 font-light"
+                    >Ventas</Link>
+                    <Link
+                        href={'/1'}
+                        className="text-white hover:text-blue-400 p-2 font-light"
+                    >Tienda</Link>
+                </nav>
             </div>
-        </header>
+        </TransparentHeader>
     )
 }
+
+export default React.memo(AdminNav)

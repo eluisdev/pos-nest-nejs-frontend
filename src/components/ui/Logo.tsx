@@ -1,7 +1,12 @@
+import Link from "next/link";
+
 export default function Logo() {
     return (
-        <h1 className="text-3xl font-extrabold text-yellow-100">POS {''}
-            <span className="text-blue-300 text-xl ">Next.js / NestJS</span>
-        </h1>
+        <Link href={"/1"}>
+            <h1 className="text-3xl font-extrabold text-blue-500 max-sm:hidden">POS.
+                <span className="text-white text-xl ">n</span>
+                <span className="text-red-300 text-xl ">.n</span>
+            </h1>
+        </Link>
     )
 }
