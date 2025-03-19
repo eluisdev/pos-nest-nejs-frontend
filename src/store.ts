@@ -1,12 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import {
-  Coupon,
-  CouponResponseSchema,
-  Product,
-  ShoppingCart,
-  User,
-} from "./schemas";
+import { Coupon, CouponResponseSchema, Product, ShoppingCart } from "./schemas";
 
 interface Store {
   total: number;
@@ -14,7 +8,6 @@ interface Store {
   contents: ShoppingCart;
   coupon: Coupon;
   totalProducts: number;
-  user: User;
   addToCart: (product: Product) => void;
   updateQuantity: (id: Product["id"], quantity: number) => void;
   removeFromCart: (id: Product["id"]) => void;
@@ -23,8 +16,6 @@ interface Store {
   applyDiscount: () => void;
   clearOrder: () => void;
   obtainTotalProducts: () => void;
-  setUser: (user: User) => void;
-  clearUser: () => void;
 }
 
 const initialState = {
@@ -37,7 +28,6 @@ const initialState = {
     message: "",
   },
   totalProducts: 0,
-  user: { userId: 0, username: "", rol: "" },
 };
 
 export const useStore = create<Store>()(
@@ -150,16 +140,6 @@ export const useStore = create<Store>()(
       );
       set(() => ({
         totalProducts,
-      }));
-    },
-    setUser: (user) => {
-      set(() => ({
-        user,
-      }));
-    },
-    clearUser: () => {
-      set(() => ({
-        user: initialState.user,
       }));
     },
   }))

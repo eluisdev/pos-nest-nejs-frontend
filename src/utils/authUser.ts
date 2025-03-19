@@ -1,4 +1,4 @@
-import { TokenSchema } from "@/schemas";
+import { UserSchema } from "@/schemas";
 import { cookies } from "next/headers";
 
 export async function getUser() {
@@ -8,16 +8,17 @@ export async function getUser() {
     const url = `${process.env.API_URL}/auth/profile`;
     const req = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     });
     const json = await req.json();
-    const userToken = TokenSchema.parse(json);
+    const userJSON = UserSchema.parse(json);
     const user = {
-      userId: userToken.userId,
-      username: userToken.username,
-      rol: userToken.rol,
+      userId: userJSON.id,
+      username: userJSON.name,
+      rol: userJSON.rol,
+      email: userJSON.email,
     };
     return user;
   } catch {

@@ -1,23 +1,22 @@
 "use server";
 
-import { ErrorResponseSchema, RegisterSchema } from "@/schemas";
+import { ErrorResponseSchema, RegisterSchema, TokenSchema } from "@/schemas";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 type ActionStateType = {
   errors: string[];
-  token: null | string;
 };
 export async function register(prevState: ActionStateType, formData: FormData) {
-  const cookiesStore = await cookies();
   const register = RegisterSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
   });
+
   if (!register.success) {
     return {
       errors: register.error.issues.map((issue) => issue.message),
-      token: null,
     };
   }
 
@@ -37,12 +36,16 @@ export async function register(prevState: ActionStateType, formData: FormData) {
     const errors = ErrorResponseSchema.parse(json);
     return {
       errors: errors.message.map((issue) => issue),
-      token: null,
     };
   }
-  cookiesStore.set("token", json.token);
-  return {
-    errors: [],
-    token: json.token,
-  };
+
+  const { token } = TokenSchema.parse(json);
+  const cookiesStore = await cookies();
+
+  cookiesStore.set("POSTNESTNEXT_TOKEN", token, {
+    httpOnly: true,
+    path: "/",
+  });
+
+  redirect("/1");
 }

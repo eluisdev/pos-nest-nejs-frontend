@@ -2,19 +2,13 @@ import { create } from "zustand";
 
 interface storeCartProps {
   isOpen: boolean;
-  closeMenu: () => void;
-  openMenu: () => void;
+  showMenu: () => void;
 }
 export const cartStore = create<storeCartProps>((set) => ({
   isOpen: false,
-  closeMenu: () => {
-    set(() => ({
-      isOpen: false,
-    }));
-  },
-  openMenu: () => {
-    set(() => ({
-      isOpen: true,
+  showMenu: () => {
+    set((get) => ({
+      isOpen: !get.isOpen,
     }));
   },
 }));

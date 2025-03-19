@@ -1,8 +1,7 @@
 
-import ClientWrapper from "@/components/auth/ClientWrapper";
+import { verifySession } from "@/auth/dal";
 import MainNav from "@/components/ui/MainNav";
 import ToastNotification from "@/components/ui/ToastNotification";
-import { getUser } from "@/utils/authUser";
 import { redirect } from "next/navigation";
 
 export default async function RootLayout({
@@ -10,22 +9,16 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const user = await getUser()
-    if (user === null) {
+    const { user } = await verifySession()
+    if (!user) {
         redirect("/auth/login")
     }
-
     return (
         <>
             <MainNav />
-            <ClientWrapper user={user}>
-                <main>
-                    <div className="p-10">
-                        {children}
-                    </div>
-                </main>
-            </ClientWrapper>
-
+            <main className="mb-5">
+                {children}
+            </main>
             <ToastNotification />
         </>
     );
